@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自我认知与修炼｜公开框架 v0.1</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Noto Sans SC","PingFang SC",sans-serif;line-height:1.65;color:#203047;background:#f4f6f7}
+*{box-sizing:border-box}body{margin:0}.container{max-width:790px;margin:0 auto;padding:32px 20px 60px}
+header{border-bottom:1px solid #dce2e6;padding-bottom:18px;margin-bottom:24px}h1{font-size:clamp(26px,4vw,36px);margin:2px 0 12px;letter-spacing:-.02em}h2{font-size:20px;margin:0 0 10px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.11em;color:#46667a}.sub{color:#516276;margin:6px 0}.card{background:white;border:1px solid #dce2e6;border-radius:14px;margin:20px 0;padding:26px;box-shadow:0 3px 14px #24323b0a}.pill{display:inline-block;border-radius:30px;background:#e8edf0;padding:2px 10px;font-size:12px;margin-bottom:12px}.choice{display:block;border:1px solid #ced7df;border-radius:10px;padding:13px 14px;cursor:pointer;margin:11px 0}.choice:has(input:checked){border-color:#1f688c;background:#f0f7fa}.choice strong{display:inline-block;margin:0 0 4px}.choice small{display:block;color:#52616f}.choice input{margin-right:10px;accent-color:#1f688c}label:not(.choice){display:block;font-weight:650;margin-top:13px}textarea{display:block;width:100%;font:inherit;border:1px solid #ccd5dc;border-radius:9px;padding:10px;min-height:75px;resize:vertical;margin:4px 0 10px;background:#fff}button{background:#194c68;color:#fff;border:none;border-radius:9px;padding:11px 17px;font:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.note{color:#5a6978;font-size:13px}.result{background:#ecf3f6;border-radius:12px;padding:18px;margin-top:15px}.hidden{display:none}.footer{font-size:13px;color:#5a6978}a{color:#1b5e85}ul{padding-left:20px}
+</style>
+</head>
+<body>
+<main class="container">
+<header>
+<p class="eyebrow">SELF UNDERSTANDING & CULTIVATION · V0.1</p>
+<h1>不是判断“你是什么人”<br>而是弄清“你为何这样做”</h1>
+<p class="sub">先做一个具体选择，再回到一件真实发生的事。所有结果都允许被修订。</p>
+<p class="note">纯本地演示 · 无账户 · 无网络上传 · 无自动人格评分</p>
+</header>
+<section class="card">
+<span class="pill">第 1 步 / 情境选择</span>
+<h2>会议中的分歧</h2>
+<p>同事在会上反对你的方案。你有两项未核实的数据，会议还有 15 分钟。你会优先怎么做？</p>
+<form id="choiceForm">
+<label class="choice"><input type="radio" name="choice" value="A"><strong>A · 说明已有依据并明确保留意见</strong><small>收益：保持立场清晰；代价：可能引用尚未核实的证据</small></label>
+<label class="choice"><input type="radio" name="choice" value="B"><strong>B · 先问对方依据，确认分歧来自哪里</strong><small>收益：厘清争点；代价：可能减少表达自己观点的时间</small></label>
+<label class="choice"><input type="radio" name="choice" value="C"><strong>C · 会后一起核验，先记录待确认项</strong><small>收益：保护决策质量；代价：需要后续沟通成本</small></label>
+<label for="reason">为什么选择它？你希望保护什么？</label>
+<textarea id="reason" placeholder="例如：我担心当众引用未经核实的数据"> </textarea>
+<label for="conditions">假如今天必须定稿、或对方是上级，你会换选择吗？</label>
+<textarea id="conditions" placeholder="什么新条件会使另一种做法更合理？"></textarea>
+<button id="reflect" type="submit">查看情境分析</button>
+</form>
+<div id="scenarioResult" class="result hidden" role="status" aria-live="polite"></div>
+</section>
+<section class="card">
+<span class="pill">第 2 步 / 真实事件</span>
+<h2>写一件真正发生过的事</h2>
+<p class="note">不必填写姓名、公司、确切地址或其他可识别的信息。你也可以只做上面的情境题。</p>
+<label for="fact">事实：当时实际上发生了什么？</label>
+<textarea id="fact" placeholder="例：会议中同事说数据需要重查，我要求第二天补充"></textarea>
+<label for="thought">想法：我当时如何理解它？（这是解释，不一定是事实）</label>
+<textarea id="thought" placeholder="例：我担心反驳会引起争执"></textarea>
+<label for="action">行为：我实际做了什么？</label>
+<textarea id="action" placeholder="例：我提出会后核对资料"></textarea>
+<label for="outcome">结果：我观察到了什么？未知就写“未知”</label>
+<textarea id="outcome" placeholder="例：讨论暂停，但负责人是否满意尚未知"></textarea>
+<label for="plan">如果下次发生〔触发条件〕，那么我会〔具体动作〕</label>
+<textarea id="plan" placeholder="例：若会上有分歧，我先复述争议点并提一个核对问题"></textarea>
+<button id="export" type="button">导出我的本地记录（JSON）</button>
+<p class="note">导出按钮只会在你自己的设备上生成文件。本页面不会将答案发送给任何人。</p>
+</section>
+<footer class="footer">公开框架原则：情境相关、证据可反驳、拒绝永久标签。此演示没有验证过的测量精度，不提供人格诊断。</footer>
+</main>
+<script>
+'use strict';
+const selected = {choice:null};
+const byId = id => document.getElementById(id);
+const val = id => byId(id).value.trim();
+byId('reason').value = '';
+byId('choiceForm').addEventListener('submit',function(event){
+ event.preventDefault();
+ const checked = document.querySelector('input[name="choice"]:checked');
+ const target = byId('scenarioResult');
+ target.replaceChildren();
+ if(!checked){target.textContent='请先选择一种策略。';target.classList.remove('hidden');return;}
+ selected.choice = checked.value;
+ const title = document.createElement('strong');
+ title.textContent = '你选择了 '+checked.value+'，这不是人格判定。';
+ const details = document.createElement('p');
+ details.textContent = '你的理由：'+(val('reason') || '未填写')+'。条件变化：'+(val('conditions') || '未填写')+'。';
+ const next = document.createElement('p');
+ next.textContent = '候选解释至少有两种：你可能在保护决策质量，也可能在控制当众冲突的成本。仅凭一次假设选择无法区分；请结合下面的真实事件检验。';
+ target.append(title,details,next);
+ target.classList.remove('hidden');
+});
+byId('export').addEventListener('click',()=>{
+ const payload = {version:'0.1',type:'local_user_record',notice:'Not a personality assessment',
+  scenario:{id:'S01',choice:selected.choice,reason:val('reason'),changed_conditions:val('conditions')},
+  episode:{observed_facts:val('fact'),thoughts:val('thought'),action_taken:val('action'),outcome_observed:val('outcome'),if_then_plan:val('plan')}};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');a.href=url;a.download='self-reflection-local.json';
+ document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
+});
+</script>
+</body>
+</html>

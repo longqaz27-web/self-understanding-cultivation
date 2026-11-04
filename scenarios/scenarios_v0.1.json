@@ -1,0 +1,511 @@
+{
+  "version": "0.1",
+  "language": "zh-CN",
+  "validation_status": "not_psychometrically_validated",
+  "items": [
+    {
+      "id": "S01",
+      "domain": "沟通",
+      "title": "公开会议中的分歧",
+      "situation": "同事在会上反对你的方案。你有两项未核实的数据，会议还有 15 分钟。",
+      "context": {
+        "time_pressure": "中",
+        "power_balance": "对等",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "当场说明你已有依据并明确保留意见",
+          "possible_benefit": "减少误解，保持立场清晰",
+          "possible_cost": "未核实数据可能被误用",
+          "fit_if": "必须立即作出不可逆决定时"
+        },
+        {
+          "id": "B",
+          "action": "先提问对方依据，确认分歧来自哪里",
+          "possible_benefit": "澄清争点，避免错误争论",
+          "possible_cost": "可能错过表达立场窗口",
+          "fit_if": "仍有时间讨论且决策可延后时"
+        },
+        {
+          "id": "C",
+          "action": "提出会议后一起核验，先记录待确认项",
+          "possible_benefit": "保护决策质量",
+          "possible_cost": "可能造成短期拖延",
+          "fit_if": "分歧不影响当场关键决策时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果决定今天必须定稿，你会如何改变做法？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S02",
+      "domain": "工作",
+      "title": "质量与交期的冲突",
+      "situation": "你负责的报告明天必须提交；同事提出的完整修改预计再花两天。",
+      "context": {
+        "time_pressure": "高",
+        "power_balance": "部分负责",
+        "reversibility": "中"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "提交现有版本，注明限制与待完成项",
+          "possible_benefit": "确保按期沟通",
+          "possible_cost": "缺陷可能影响决策",
+          "fit_if": "现有内容能满足最低使用要求时"
+        },
+        {
+          "id": "B",
+          "action": "申请延期，补完关键证据",
+          "possible_benefit": "提高准确性",
+          "possible_cost": "可能造成交付成本",
+          "fit_if": "错误后果严重且延迟可接受时"
+        },
+        {
+          "id": "C",
+          "action": "筛选影响结论的改动优先处理",
+          "possible_benefit": "兼顾截止时间与关键质量",
+          "possible_cost": "遗漏非关键改动的机会成本",
+          "fit_if": "关键风险能够在现有时间内处理时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果报告涉及人身安全或监管决定，是否改变优先顺序？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S03",
+      "domain": "合作",
+      "title": "团队成果的归属",
+      "situation": "项目获得表扬，但另一位同事关键贡献没有被提及；你正在向负责人汇报。",
+      "context": {
+        "time_pressure": "中",
+        "power_balance": "有影响力",
+        "reversibility": "中"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "主动补充同事的具体贡献",
+          "possible_benefit": "促进公平归属与信任",
+          "possible_cost": "可能占用有限汇报时间",
+          "fit_if": "贡献证据明确且能够准确表达时"
+        },
+        {
+          "id": "B",
+          "action": "先完成汇报，事后以书面形式补充贡献者",
+          "possible_benefit": "避免打断关键议程",
+          "possible_cost": "事后修正曝光度可能偏低",
+          "fit_if": "现场时间已耗尽时"
+        },
+        {
+          "id": "C",
+          "action": "先询问同事希望如何被提及，再补充",
+          "possible_benefit": "尊重意愿，避免意外披露",
+          "possible_cost": "不能即时更正",
+          "fit_if": "同事对公开署名有顾虑时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果涉及保密要求或贡献归属尚有争议，你会怎样做？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S04",
+      "domain": "关系",
+      "title": "连续被打断时如何表达",
+      "situation": "一位熟人在讨论中反复打断你。你希望把核心理由说完，又要维护关系。",
+      "context": {
+        "time_pressure": "低",
+        "power_balance": "对等",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "礼貌说明需要 30 秒说完，再邀请对方发言",
+          "possible_benefit": "保护表达空间",
+          "possible_cost": "对方可能感觉被纠正",
+          "fit_if": "对方能够接受直接交流时"
+        },
+        {
+          "id": "B",
+          "action": "暂时停下听对方，之后再提出观点",
+          "possible_benefit": "降低当下摩擦",
+          "possible_cost": "自己的表达可能落空",
+          "fit_if": "对方情绪激动且谈话可延后时"
+        },
+        {
+          "id": "C",
+          "action": "改成文字总结，约定之后回应",
+          "possible_benefit": "减少同步争执",
+          "possible_cost": "可能延迟解决",
+          "fit_if": "当前双方都难以平静交谈时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果对方是拥有决定权的上级，哪种策略风险会改变？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S05",
+      "domain": "决策",
+      "title": "证据不完整的选择",
+      "situation": "你要决定是否投入一项新项目，已有正面案例，但关键成本数据缺失，决定一周内仍可修改。",
+      "context": {
+        "time_pressure": "低",
+        "power_balance": "可自主决定",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "先做小规模试验再加大投入",
+          "possible_benefit": "降低不可逆风险",
+          "possible_cost": "可能错失速度",
+          "fit_if": "允许小规模测试时"
+        },
+        {
+          "id": "B",
+          "action": "补齐关键成本资料后再决定",
+          "possible_benefit": "减少信息盲点",
+          "possible_cost": "增加等待成本",
+          "fit_if": "资料能及时取得时"
+        },
+        {
+          "id": "C",
+          "action": "设定损失上限，分阶段启动",
+          "possible_benefit": "保留机会并控制下行",
+          "possible_cost": "仍可能损失试错资金",
+          "fit_if": "机会窗口短且损失可承受时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果决策不可逆、损失超过可承受范围呢？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S06",
+      "domain": "认识偏差",
+      "title": "发现自己判断错了",
+      "situation": "你先前公开支持某判断；新的可靠数据与它冲突，其他人正在讨论。",
+      "context": {
+        "time_pressure": "中",
+        "power_balance": "对等",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "当场承认旧判断不成立并更新",
+          "possible_benefit": "及时纠正信息",
+          "possible_cost": "可能遭受短期尴尬",
+          "fit_if": "新证据已足以推翻旧结论时"
+        },
+        {
+          "id": "B",
+          "action": "先核对数据来源，再公开说明变化",
+          "possible_benefit": "避免被伪证据误导",
+          "possible_cost": "延迟更正",
+          "fit_if": "新数据仍存在真实性疑点时"
+        },
+        {
+          "id": "C",
+          "action": "明确告知自己正在复核并约定更新时间",
+          "possible_benefit": "公开不确定性",
+          "possible_cost": "暂时无法给出明确方向",
+          "fit_if": "需更多时间核对但他人需要知道风险时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果错误决定已产生实际损失，是否还需要补救动作？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S07",
+      "domain": "自律",
+      "title": "短期奖励与长期目标",
+      "situation": "今晚有娱乐邀请，明天有一项需要清醒完成的任务。你已有连续三天超负荷工作。",
+      "context": {
+        "time_pressure": "低",
+        "power_balance": "自主",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "拒绝邀请，按原计划休息",
+          "possible_benefit": "保障次日状态",
+          "possible_cost": "错过社交机会",
+          "fit_if": "次日任务风险高时"
+        },
+        {
+          "id": "B",
+          "action": "限定一小时参加并预设离开提醒",
+          "possible_benefit": "兼顾社交与计划",
+          "possible_cost": "执行边界可能失败",
+          "fit_if": "路程短且可控制结束时间时"
+        },
+        {
+          "id": "C",
+          "action": "接受邀请并提前调整次日计划",
+          "possible_benefit": "响应恢复与关系需求",
+          "possible_cost": "调整可能影响次日交付",
+          "fit_if": "次日安排确实可以合法调整时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果你已严重疲惫，休息和社交哪一项更能恢复？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S08",
+      "domain": "同理",
+      "title": "朋友寻求帮助",
+      "situation": "朋友反复倾诉困扰，你今晚还有必须完成的个人工作；他没有表示存在即时安全风险。",
+      "context": {
+        "time_pressure": "高",
+        "power_balance": "对等",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "先听 10 分钟，再明确告知可继续的时间",
+          "possible_benefit": "提供即时支持且设边界",
+          "possible_cost": "有限倾听可能不足",
+          "fit_if": "有短时缓冲空间时"
+        },
+        {
+          "id": "B",
+          "action": "说明今晚无法深入谈，约定明日时段",
+          "possible_benefit": "保护承诺并给出确定支持",
+          "possible_cost": "朋友当晚可能失望",
+          "fit_if": "事情非紧急且明天可联系时"
+        },
+        {
+          "id": "C",
+          "action": "询问对方现在最需要倾听还是解决具体问题",
+          "possible_benefit": "避免帮助方式错位",
+          "possible_cost": "需要时间澄清",
+          "fit_if": "需求不清楚且能先交换信息时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果对方明确面临即时安全风险，哪个优先级必须改变？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S09",
+      "domain": "环境",
+      "title": "资源不对等下的表达",
+      "situation": "你在组织中权力较弱，发现流程有风险。负责人不喜欢公开被质疑，但有正式反馈渠道。",
+      "context": {
+        "time_pressure": "中",
+        "power_balance": "不对等",
+        "reversibility": "中"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "使用正式渠道提交可核查风险信息",
+          "possible_benefit": "提高可追溯性",
+          "possible_cost": "处理速度可能慢",
+          "fit_if": "渠道有效且无即时伤害时"
+        },
+        {
+          "id": "B",
+          "action": "先私下向负责人提交事实与可行替代方案",
+          "possible_benefit": "可能降低防御性",
+          "possible_cost": "仍存在信息压制风险",
+          "fit_if": "私下沟通安全且负责人可回应时"
+        },
+        {
+          "id": "C",
+          "action": "先和具有职责的专业人员核验证据与紧急性",
+          "possible_benefit": "降低事实错误与个人承压",
+          "possible_cost": "反馈可能延迟",
+          "fit_if": "风险尚不明确且非即时危险时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果风险即将导致不可逆伤害，是否还应等待常规流程？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S10",
+      "domain": "隐私",
+      "title": "分享他人的故事",
+      "situation": "你想用朋友经历说明一个观点，但故事细节可能让认识他的人猜出身份。",
+      "context": {
+        "time_pressure": "低",
+        "power_balance": "对等",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "获得明确同意后才分享必要信息",
+          "possible_benefit": "尊重自主与信任",
+          "possible_cost": "可能无法获得同意",
+          "fit_if": "故事确有分享价值时"
+        },
+        {
+          "id": "B",
+          "action": "仅讨论一般原则，不使用具体故事",
+          "possible_benefit": "避免泄露身份",
+          "possible_cost": "论据不够生动",
+          "fit_if": "隐私风险高或同意缺失时"
+        },
+        {
+          "id": "C",
+          "action": "自己编写虚构的合成案例并明确标注",
+          "possible_benefit": "兼顾说明与保护",
+          "possible_cost": "虚构案例不能当真实证据",
+          "fit_if": "需要教学示例而非事实证明时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果涉及商业机密或私人健康经历，边界是否更严格？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S11",
+      "domain": "协作",
+      "title": "有人拖延影响你的计划",
+      "situation": "协作伙伴两次未按约交付，你不知道原因，自己的任务已经受到影响。",
+      "context": {
+        "time_pressure": "中",
+        "power_balance": "对等",
+        "reversibility": "中"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "询问真实障碍并重新约定可检查节点",
+          "possible_benefit": "识别环境原因",
+          "possible_cost": "若持续失约会浪费时间",
+          "fit_if": "对方仍有执行机会时"
+        },
+        {
+          "id": "B",
+          "action": "同步启动备用方案并说明风险",
+          "possible_benefit": "保护关键节点",
+          "possible_cost": "可能削弱彼此信任",
+          "fit_if": "关键任务已经濒临逾期时"
+        },
+        {
+          "id": "C",
+          "action": "明确将任务重新拆分并记录责任边界",
+          "possible_benefit": "提升可操作性",
+          "possible_cost": "增加协调成本",
+          "fit_if": "任务本身拆分不清楚时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果对方处于不可控紧急情况，你的归因会改变吗？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    },
+    {
+      "id": "S12",
+      "domain": "韧性",
+      "title": "失败后的方向调整",
+      "situation": "你尝试的新习惯连续一周没做到；期间加班显著增加，实际触发条件与原计划不同。",
+      "context": {
+        "time_pressure": "低",
+        "power_balance": "自主",
+        "reversibility": "高"
+      },
+      "choices": [
+        {
+          "id": "A",
+          "action": "分析触发条件，降低行动难度再试",
+          "possible_benefit": "让计划匹配现实约束",
+          "possible_cost": "调整可能减慢速度",
+          "fit_if": "旧目标过重或不可执行时"
+        },
+        {
+          "id": "B",
+          "action": "保留目标，改变时间地点与提醒方式",
+          "possible_benefit": "提升可执行性",
+          "possible_cost": "若目标本身不合理可能无效",
+          "fit_if": "目标仍重要且资源足够时"
+        },
+        {
+          "id": "C",
+          "action": "暂停这个目标，优先解决外部资源限制",
+          "possible_benefit": "避免反复失败",
+          "possible_cost": "短期无法积累行为",
+          "fit_if": "环境障碍是主要原因时"
+        }
+      ],
+      "reflection_questions": [
+        "你选哪项，最担心的后果是什么？",
+        "哪些事实是你知道的，哪些只是在推测？",
+        "如果恢复原有时间资源，你愿意怎样测试新方案？",
+        "如果把选择放到你的一次真实经历里，行动会一样吗？"
+      ],
+      "scoring": "none",
+      "principle": "没有人格标准答案；记录目标、约束与反例"
+    }
+  ]
+}

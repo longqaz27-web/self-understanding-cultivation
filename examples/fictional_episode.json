@@ -1,0 +1,39 @@
+{
+  "event_id": "fictional-001",
+  "date": "2026-11-01",
+  "context": {
+    "domain": "工作沟通",
+    "goal": "在不影响进度的情况下澄清项目风险",
+    "constraints": [
+      "会议剩余 10 分钟",
+      "尚未核实两个数据来源"
+    ],
+    "time_pressure": "medium",
+    "power_balance": "equal",
+    "reversibility": "easy"
+  },
+  "observed_facts": [
+    "会议中一名同事提出与我不同的结论",
+    "我当场询问了两项数据的出处"
+  ],
+  "thoughts": [
+    "我担心如果立即争辩会引用错误数字"
+  ],
+  "emotions": [
+    "紧张（自述 5/10）"
+  ],
+  "action_taken": "提出先核对关键数据，约定次日给出补充意见",
+  "outcome_observed": "双方同意暂不把争议数据写入最终结论",
+  "uncertainties": [
+    "对方是否认为我在回避问题，未知"
+  ],
+  "alternative_explanations": [
+    "我重视准确性，所以先核对",
+    "我可能担心公开冲突，所以延后表态"
+  ],
+  "evidence_sources": [
+    "self_report"
+  ],
+  "if_then_plan": "如果下次有相同分歧，我会先说清楚已确定和待核实的部分",
+  "review_status": "not_due"
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "匿名真实事件记录（非诊断数据）",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "date",
+    "context",
+    "observed_facts",
+    "action_taken",
+    "outcome_observed",
+    "uncertainties"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "goal",
+        "constraints"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "goal": {
+          "type": "string"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "time_pressure": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "power_balance": {
+          "enum": [
+            "equal",
+            "unequal",
+            "unknown"
+          ]
+        },
+        "reversibility": {
+          "enum": [
+            "easy",
+            "partial",
+            "hard",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "observed_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "thoughts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "emotions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "action_taken": {
+      "type": "string",
+      "minLength": 1
+    },
+    "outcome_observed": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "alternative_explanations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_sources": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "self_report",
+          "contemporaneous_note",
+          "observable_artifact"
+        ]
+      }
+    },
+    "if_then_plan": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "not_due",
+        "triggered_executed",
+        "triggered_not_executed",
+        "not_triggered",
+        "unverifiable"
+      ]
+    }
+  }
+}
