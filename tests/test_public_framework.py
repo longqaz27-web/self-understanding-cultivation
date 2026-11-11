@@ -48,5 +48,33 @@ class OpenFrameworkTests(unittest.TestCase):
         self.assertIn('MIT License',(ROOT/'LICENSE-CODE').read_text(encoding='utf-8'))
         self.assertIn('Issue/PR',(ROOT/'docs/PRIVACY_AND_SAFETY.md').read_text(encoding='utf-8'))
 
+    def test_embedded_twelve_scenarios_match_canonical_bank(self):
+        html = (ROOT/'docs/index.html').read_text(encoding='utf-8')
+        match = re.search(r'<script id="scenario-data" type="application/json">(.*?)</script>', html, re.S)
+        self.assertIsNotNone(match)
+        embedded = json.loads(match.group(1))
+        self.assertEqual(embedded, SCENARIOS)
+        self.assertEqual(len(embedded['items']), 12)
+        self.assertIn('scenarioSelect', html)
+
+    def test_site_event_export_and_import_contract(self):
+        html = (ROOT/'docs/index.html').read_text(encoding='utf-8')
+        for token in ['observed_facts','action_taken','outcome_observed','alternative_explanations',
+                      'evidence_sources','if_then_plan','review_status','importJson','counterexample',
+                      'createObjectURL']:
+            with self.subTest(token=token):
+                self.assertIn(token, html)
+
+    def test_site_javascript_parses_with_node(self):
+        import shutil
+        import subprocess
+        if not shutil.which('node'):
+            self.skipTest('Node.js not installed')
+        html = (ROOT/'docs/index.html').read_text(encoding='utf-8')
+        scripts = re.findall(r'<script(?:\s+[^>]*)?>(.*?)</script>',html,re.S)
+        self.assertEqual(len(scripts),2)
+        result = subprocess.run(['node','--check','-'],input=scripts[-1],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
 if __name__ == '__main__':
     unittest.main()

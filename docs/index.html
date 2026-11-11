@@ -1,89 +1,201 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>自我认知与修炼｜公开框架 v0.1</title>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="12道情境题、真实事件记录、竞争解释与行为复盘；数据仅保存在当前页面，可导出本地JSON。">
+<title>自我认知与修炼｜交互体验 v0.2</title>
 <style>
-:root{color-scheme:light;font-family:system-ui,-apple-system,"Noto Sans SC","PingFang SC",sans-serif;line-height:1.65;color:#203047;background:#f4f6f7}
-*{box-sizing:border-box}body{margin:0}.container{max-width:790px;margin:0 auto;padding:32px 20px 60px}
-header{border-bottom:1px solid #dce2e6;padding-bottom:18px;margin-bottom:24px}h1{font-size:clamp(26px,4vw,36px);margin:2px 0 12px;letter-spacing:-.02em}h2{font-size:20px;margin:0 0 10px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.11em;color:#46667a}.sub{color:#516276;margin:6px 0}.card{background:white;border:1px solid #dce2e6;border-radius:14px;margin:20px 0;padding:26px;box-shadow:0 3px 14px #24323b0a}.pill{display:inline-block;border-radius:30px;background:#e8edf0;padding:2px 10px;font-size:12px;margin-bottom:12px}.choice{display:block;border:1px solid #ced7df;border-radius:10px;padding:13px 14px;cursor:pointer;margin:11px 0}.choice:has(input:checked){border-color:#1f688c;background:#f0f7fa}.choice strong{display:inline-block;margin:0 0 4px}.choice small{display:block;color:#52616f}.choice input{margin-right:10px;accent-color:#1f688c}label:not(.choice){display:block;font-weight:650;margin-top:13px}textarea{display:block;width:100%;font:inherit;border:1px solid #ccd5dc;border-radius:9px;padding:10px;min-height:75px;resize:vertical;margin:4px 0 10px;background:#fff}button{background:#194c68;color:#fff;border:none;border-radius:9px;padding:11px 17px;font:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.note{color:#5a6978;font-size:13px}.result{background:#ecf3f6;border-radius:12px;padding:18px;margin-top:15px}.hidden{display:none}.footer{font-size:13px;color:#5a6978}a{color:#1b5e85}ul{padding-left:20px}
-</style>
-</head>
-<body>
-<main class="container">
-<header>
-<p class="eyebrow">SELF UNDERSTANDING & CULTIVATION · V0.1</p>
-<h1>不是判断“你是什么人”<br>而是弄清“你为何这样做”</h1>
-<p class="sub">先做一个具体选择，再回到一件真实发生的事。所有结果都允许被修订。</p>
-<p class="note">纯本地演示 · 无账户 · 无网络上传 · 无自动人格评分</p>
-</header>
-<section class="card">
-<span class="pill">第 1 步 / 情境选择</span>
-<h2>会议中的分歧</h2>
-<p>同事在会上反对你的方案。你有两项未核实的数据，会议还有 15 分钟。你会优先怎么做？</p>
-<form id="choiceForm">
-<label class="choice"><input type="radio" name="choice" value="A"><strong>A · 说明已有依据并明确保留意见</strong><small>收益：保持立场清晰；代价：可能引用尚未核实的证据</small></label>
-<label class="choice"><input type="radio" name="choice" value="B"><strong>B · 先问对方依据，确认分歧来自哪里</strong><small>收益：厘清争点；代价：可能减少表达自己观点的时间</small></label>
-<label class="choice"><input type="radio" name="choice" value="C"><strong>C · 会后一起核验，先记录待确认项</strong><small>收益：保护决策质量；代价：需要后续沟通成本</small></label>
-<label for="reason">为什么选择它？你希望保护什么？</label>
-<textarea id="reason" placeholder="例如：我担心当众引用未经核实的数据"> </textarea>
-<label for="conditions">假如今天必须定稿、或对方是上级，你会换选择吗？</label>
-<textarea id="conditions" placeholder="什么新条件会使另一种做法更合理？"></textarea>
-<button id="reflect" type="submit">查看情境分析</button>
-</form>
-<div id="scenarioResult" class="result hidden" role="status" aria-live="polite"></div>
+:root{font-family:system-ui,-apple-system,"PingFang SC","Noto Sans SC",sans-serif;line-height:1.65;color:#203146;background:#f4f6f8}
+*{box-sizing:border-box}body{margin:0}main{max-width:950px;margin:auto;padding:28px 18px 60px}
+header{border-bottom:1px solid #dce4eb;padding:20px 0 24px}h1{font-size:clamp(27px,5vw,39px);line-height:1.3;margin:8px 0}h2{margin:0 0 10px;font-size:24px}h3{margin:16px 0 8px;font-size:18px}
+p{margin:8px 0 14px}.eyebrow{font-weight:800;letter-spacing:.09em;color:#3d708e;font-size:12px}.muted{color:#576a7a}.small{font-size:13px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}a{color:#1d6087}nav a{border:1px solid #cdd8e1;background:white;border-radius:20px;padding:6px 12px;text-decoration:none}
+.card{background:white;border:1px solid #dce4ec;border-radius:17px;box-shadow:0 4px 15px #1234a009;margin:21px 0;padding:clamp(18px,4vw,30px)}
+.step{font-size:12px;font-weight:800;background:#e9f2f6;border-radius:20px;padding:4px 12px;color:#296280;display:inline-block;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:650px){.grid{grid-template-columns:1fr}main{padding:15px 12px 40px}}
+label:not(.choice){display:block;font-weight:650;margin:13px 0 4px}
+textarea,select,input[type="text"],input[type="date"]{display:block;width:100%;border:1px solid #c8d4df;border-radius:9px;background:white;color:#203146;padding:10px;font:inherit}
+textarea{min-height:78px;resize:vertical}
+.choice{display:flex;align-items:flex-start;gap:11px;border:1px solid #d2dce5;border-radius:11px;padding:13px;margin:10px 0;cursor:pointer}
+.choice:has(input:checked){background:#edf6fa;border-color:#2d7396}
+.choice input{margin-top:5px;accent-color:#2b759c}.choice strong,.choice small{display:block}.choice small{color:#587082}
+.context{background:#f3f7f9;border-radius:9px;padding:12px 14px}
+button{font:inherit;padding:10px 16px;border:0;border-radius:9px;color:white;background:#205d7d;cursor:pointer}
+button.secondary{background:#e6eef3;color:#285674}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}
+.result{border-left:4px solid #377c9e;background:#eef5f8;padding:15px;border-radius:8px;margin-top:14px}
+.result section{border-bottom:1px solid #cfdee7;padding:6px 0}.result section:last-child{border:0}
+.hidden{display:none}.error{color:#a53b37}.ok{color:#206648}.progress{font-weight:800;color:#245d7c}
+:focus-visible{outline:3px solid #9accdf;outline-offset:2px}
+footer{font-size:13px;color:#546b7e;margin-top:25px}
+</style></head>
+<body><main>
+<header><div class="eyebrow">SELF UNDERSTANDING & CULTIVATION · V0.2</div>
+<h1>从一次选择，到一次可验证的行动</h1>
+<p class="muted">12 道情境题 → 真实事件 → 竞争解释 → If–Then 行动计划 → 复盘。没有人格分数与标准答案。</p>
+<p class="small muted">纯本地体验，不上传数据、不设账户、不使用浏览器持久存储。刷新页面会丢失未导出的记录。</p>
+<nav><a href="#scenarios">情境题</a><a href="#event">真实事件</a><a href="#reflection">分析与行动</a><a href="#review">复盘和导出</a></nav></header>
+<section class="card" id="scenarios"><span class="step">01 / 情境选择</span><h2>12 道题，允许不同选择</h2>
+<div class="grid"><div><label for="scenarioSelect">选择题目</label><select id="scenarioSelect"></select></div><div><label>已选择的题目</label><p class="progress" id="progress" aria-live="polite">0 / 12</p></div></div>
+<h3 id="scenarioTitle"></h3><p id="scenarioSituation"></p><p class="context" id="scenarioContext"></p>
+<fieldset style="border:0;margin:0;padding:0"><legend>选择一种策略</legend><div id="choices"></div></fieldset>
+<label for="reason">为什么选择？</label><textarea id="reason" placeholder="你希望保护什么？担心什么代价？"></textarea>
+<label for="conditions">哪些条件变化会让你改选？</label><textarea id="conditions" placeholder="例如时间更紧、关系变化、结果难以撤回"></textarea>
+<div class="actions"><button type="button" id="reflect">分析这个选择</button><button type="button" class="secondary" id="next">下一道题</button></div>
+<div id="scenarioResult" class="result hidden" role="status" aria-live="polite"></div></section>
+<section class="card" id="event"><span class="step">02 / 真实事件</span><h2>记录一件已经发生的事</h2>
+<p class="small muted">事实与推测分开。不要填写姓名、地址、单位等可识别信息。* 为必要输入。</p>
+<div class="grid"><div><label for="eventDate">日期 *</label><input type="date" id="eventDate"></div><div><label for="domain">场景</label><input type="text" id="domain" placeholder="工作、家庭、协作等"></div></div>
+<label for="goal">目标 *</label><textarea id="goal"></textarea>
+<label for="constraints">外部约束（每行一项）</label><textarea id="constraints"></textarea>
+<div class="grid"><div><label for="timePressure">时间压力</label><select id="timePressure"><option value="unknown">未知</option><option value="low">低</option><option value="medium">中</option><option value="high">高</option></select></div>
+<div><label for="powerBalance">权力关系</label><select id="powerBalance"><option value="unknown">未知</option><option value="equal">对等</option><option value="unequal">不对等</option></select></div></div>
+<label for="reversibility">决策可逆性</label><select id="reversibility"><option value="unknown">未知</option><option value="easy">容易撤回</option><option value="partial">部分可逆</option><option value="hard">难以撤回</option></select>
+<label for="fact">可观察事实 *</label><textarea id="fact" placeholder="实际发生了什么，不把猜测写成事实"></textarea>
+<label for="thought">当时的主观想法</label><textarea id="thought"></textarea>
+<label for="emotion">当时的感受</label><textarea id="emotion"></textarea>
+<label for="action">实际采取的行动 *</label><textarea id="action"></textarea>
+<label for="outcome">观察到的结果 *</label><textarea id="outcome"></textarea>
+<label for="unknown">仍未知或未核实的内容（每行一项）</label><textarea id="unknown"></textarea>
 </section>
-<section class="card">
-<span class="pill">第 2 步 / 真实事件</span>
-<h2>写一件真正发生过的事</h2>
-<p class="note">不必填写姓名、公司、确切地址或其他可识别的信息。你也可以只做上面的情境题。</p>
-<label for="fact">事实：当时实际上发生了什么？</label>
-<textarea id="fact" placeholder="例：会议中同事说数据需要重查，我要求第二天补充"></textarea>
-<label for="thought">想法：我当时如何理解它？（这是解释，不一定是事实）</label>
-<textarea id="thought" placeholder="例：我担心反驳会引起争执"></textarea>
-<label for="action">行为：我实际做了什么？</label>
-<textarea id="action" placeholder="例：我提出会后核对资料"></textarea>
-<label for="outcome">结果：我观察到了什么？未知就写“未知”</label>
-<textarea id="outcome" placeholder="例：讨论暂停，但负责人是否满意尚未知"></textarea>
-<label for="plan">如果下次发生〔触发条件〕，那么我会〔具体动作〕</label>
-<textarea id="plan" placeholder="例：若会上有分歧，我先复述争议点并提一个核对问题"></textarea>
-<button id="export" type="button">导出我的本地记录（JSON）</button>
-<p class="note">导出按钮只会在你自己的设备上生成文件。本页面不会将答案发送给任何人。</p>
+<section class="card" id="reflection"><span class="step">03 / 解释与行动</span><h2>至少考虑两种解释</h2>
+<p class="small muted">能力、环境与动机是检查项，不是自动诊断出的原因。下面的解释由填写者提出，系统不凭空补造。</p>
+<div class="grid"><div><label for="capability">能力 C：有无知识或技能限制？</label><textarea id="capability"></textarea></div>
+<div><label for="opportunity">机会 O：时间、资源、权限允许吗？</label><textarea id="opportunity"></textarea></div></div>
+<label for="motivation">动机 M：在乎什么、担心什么？</label><textarea id="motivation"></textarea>
+<label for="explanation1">候选解释 1</label><textarea id="explanation1"></textarea>
+<label for="explanation2">竞争解释 2</label><textarea id="explanation2"></textarea>
+<label for="counterexample">什么反例会让你修改解释？</label><textarea id="counterexample"></textarea>
+<div class="grid"><div><label for="trigger">If：下次出现什么明确条件？</label><textarea id="trigger"></textarea></div>
+<div><label for="thenAction">Then：到时采取哪一个具体动作？</label><textarea id="thenAction"></textarea></div></div>
+<div class="grid"><div><label for="expected">想观察到什么结果？</label><textarea id="expected"></textarea></div><div><label for="stopRule">什么条件下停止或改策略？</label><textarea id="stopRule"></textarea></div></div>
+<div class="actions"><button type="button" id="analyze">生成本地分析卡</button></div>
+<div id="analysisResult" class="result hidden" role="status" aria-live="polite"></div>
 </section>
-<footer class="footer">公开框架原则：情境相关、证据可反驳、拒绝永久标签。此演示没有验证过的测量精度，不提供人格诊断。</footer>
+<section class="card" id="review"><span class="step">04 / 复盘与数据管理</span><h2>真实发生后再核验</h2>
+<p class="small muted">如果计划中的条件没有出现，应记为“未触发”，不算执行失败。再次使用可以导入上次导出的文件。</p>
+<div class="grid"><div><label for="reviewDate">复盘日期</label><input type="date" id="reviewDate"></div><div><label for="reviewStatus">执行状态</label>
+<select id="reviewStatus"><option value="not_due">尚未复盘</option><option value="triggered_executed">触发且执行</option><option value="triggered_not_executed">触发但未执行</option><option value="not_triggered">未触发</option><option value="unverifiable">无法核实</option></select></div></div>
+<label for="reviewNotes">观察到的实际结果、意外代价或反例</label><textarea id="reviewNotes"></textarea>
+<div class="actions"><button type="button" id="export">导出本地 JSON</button></div>
+<label for="importJson">导入此前导出的 JSON</label><input type="file" id="importJson" accept=".json,application/json">
+<p id="fileStatus" role="status" aria-live="polite"></p>
+<p class="small muted">导出的 JSON 保存在你的设备上；本页面不会上传、自动保存或共享任何输入。</p></section>
+<footer>本项目尚未验证测量效度。仅有 1 次事件不能建立行为趋势；初步趋势至少需要 3 次可比事件、2 个日期并检查反例。<a href="https://github.com/longqaz27-web/self-understanding-cultivation">源代码</a></footer>
 </main>
+<script id="scenario-data" type="application/json">{"version":"0.1","language":"zh-CN","validation_status":"not_psychometrically_validated","items":[{"id":"S01","domain":"沟通","title":"公开会议中的分歧","situation":"同事在会上反对你的方案。你有两项未核实的数据，会议还有 15 分钟。","context":{"time_pressure":"中","power_balance":"对等","reversibility":"高"},"choices":[{"id":"A","action":"当场说明你已有依据并明确保留意见","possible_benefit":"减少误解，保持立场清晰","possible_cost":"未核实数据可能被误用","fit_if":"必须立即作出不可逆决定时"},{"id":"B","action":"先提问对方依据，确认分歧来自哪里","possible_benefit":"澄清争点，避免错误争论","possible_cost":"可能错过表达立场窗口","fit_if":"仍有时间讨论且决策可延后时"},{"id":"C","action":"提出会议后一起核验，先记录待确认项","possible_benefit":"保护决策质量","possible_cost":"可能造成短期拖延","fit_if":"分歧不影响当场关键决策时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果决定今天必须定稿，你会如何改变做法？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S02","domain":"工作","title":"质量与交期的冲突","situation":"你负责的报告明天必须提交；同事提出的完整修改预计再花两天。","context":{"time_pressure":"高","power_balance":"部分负责","reversibility":"中"},"choices":[{"id":"A","action":"提交现有版本，注明限制与待完成项","possible_benefit":"确保按期沟通","possible_cost":"缺陷可能影响决策","fit_if":"现有内容能满足最低使用要求时"},{"id":"B","action":"申请延期，补完关键证据","possible_benefit":"提高准确性","possible_cost":"可能造成交付成本","fit_if":"错误后果严重且延迟可接受时"},{"id":"C","action":"筛选影响结论的改动优先处理","possible_benefit":"兼顾截止时间与关键质量","possible_cost":"遗漏非关键改动的机会成本","fit_if":"关键风险能够在现有时间内处理时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果报告涉及人身安全或监管决定，是否改变优先顺序？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S03","domain":"合作","title":"团队成果的归属","situation":"项目获得表扬，但另一位同事关键贡献没有被提及；你正在向负责人汇报。","context":{"time_pressure":"中","power_balance":"有影响力","reversibility":"中"},"choices":[{"id":"A","action":"主动补充同事的具体贡献","possible_benefit":"促进公平归属与信任","possible_cost":"可能占用有限汇报时间","fit_if":"贡献证据明确且能够准确表达时"},{"id":"B","action":"先完成汇报，事后以书面形式补充贡献者","possible_benefit":"避免打断关键议程","possible_cost":"事后修正曝光度可能偏低","fit_if":"现场时间已耗尽时"},{"id":"C","action":"先询问同事希望如何被提及，再补充","possible_benefit":"尊重意愿，避免意外披露","possible_cost":"不能即时更正","fit_if":"同事对公开署名有顾虑时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果涉及保密要求或贡献归属尚有争议，你会怎样做？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S04","domain":"关系","title":"连续被打断时如何表达","situation":"一位熟人在讨论中反复打断你。你希望把核心理由说完，又要维护关系。","context":{"time_pressure":"低","power_balance":"对等","reversibility":"高"},"choices":[{"id":"A","action":"礼貌说明需要 30 秒说完，再邀请对方发言","possible_benefit":"保护表达空间","possible_cost":"对方可能感觉被纠正","fit_if":"对方能够接受直接交流时"},{"id":"B","action":"暂时停下听对方，之后再提出观点","possible_benefit":"降低当下摩擦","possible_cost":"自己的表达可能落空","fit_if":"对方情绪激动且谈话可延后时"},{"id":"C","action":"改成文字总结，约定之后回应","possible_benefit":"减少同步争执","possible_cost":"可能延迟解决","fit_if":"当前双方都难以平静交谈时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果对方是拥有决定权的上级，哪种策略风险会改变？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S05","domain":"决策","title":"证据不完整的选择","situation":"你要决定是否投入一项新项目，已有正面案例，但关键成本数据缺失，决定一周内仍可修改。","context":{"time_pressure":"低","power_balance":"可自主决定","reversibility":"高"},"choices":[{"id":"A","action":"先做小规模试验再加大投入","possible_benefit":"降低不可逆风险","possible_cost":"可能错失速度","fit_if":"允许小规模测试时"},{"id":"B","action":"补齐关键成本资料后再决定","possible_benefit":"减少信息盲点","possible_cost":"增加等待成本","fit_if":"资料能及时取得时"},{"id":"C","action":"设定损失上限，分阶段启动","possible_benefit":"保留机会并控制下行","possible_cost":"仍可能损失试错资金","fit_if":"机会窗口短且损失可承受时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果决策不可逆、损失超过可承受范围呢？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S06","domain":"认识偏差","title":"发现自己判断错了","situation":"你先前公开支持某判断；新的可靠数据与它冲突，其他人正在讨论。","context":{"time_pressure":"中","power_balance":"对等","reversibility":"高"},"choices":[{"id":"A","action":"当场承认旧判断不成立并更新","possible_benefit":"及时纠正信息","possible_cost":"可能遭受短期尴尬","fit_if":"新证据已足以推翻旧结论时"},{"id":"B","action":"先核对数据来源，再公开说明变化","possible_benefit":"避免被伪证据误导","possible_cost":"延迟更正","fit_if":"新数据仍存在真实性疑点时"},{"id":"C","action":"明确告知自己正在复核并约定更新时间","possible_benefit":"公开不确定性","possible_cost":"暂时无法给出明确方向","fit_if":"需更多时间核对但他人需要知道风险时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果错误决定已产生实际损失，是否还需要补救动作？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S07","domain":"自律","title":"短期奖励与长期目标","situation":"今晚有娱乐邀请，明天有一项需要清醒完成的任务。你已有连续三天超负荷工作。","context":{"time_pressure":"低","power_balance":"自主","reversibility":"高"},"choices":[{"id":"A","action":"拒绝邀请，按原计划休息","possible_benefit":"保障次日状态","possible_cost":"错过社交机会","fit_if":"次日任务风险高时"},{"id":"B","action":"限定一小时参加并预设离开提醒","possible_benefit":"兼顾社交与计划","possible_cost":"执行边界可能失败","fit_if":"路程短且可控制结束时间时"},{"id":"C","action":"接受邀请并提前调整次日计划","possible_benefit":"响应恢复与关系需求","possible_cost":"调整可能影响次日交付","fit_if":"次日安排确实可以合法调整时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果你已严重疲惫，休息和社交哪一项更能恢复？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S08","domain":"同理","title":"朋友寻求帮助","situation":"朋友反复倾诉困扰，你今晚还有必须完成的个人工作；他没有表示存在即时安全风险。","context":{"time_pressure":"高","power_balance":"对等","reversibility":"高"},"choices":[{"id":"A","action":"先听 10 分钟，再明确告知可继续的时间","possible_benefit":"提供即时支持且设边界","possible_cost":"有限倾听可能不足","fit_if":"有短时缓冲空间时"},{"id":"B","action":"说明今晚无法深入谈，约定明日时段","possible_benefit":"保护承诺并给出确定支持","possible_cost":"朋友当晚可能失望","fit_if":"事情非紧急且明天可联系时"},{"id":"C","action":"询问对方现在最需要倾听还是解决具体问题","possible_benefit":"避免帮助方式错位","possible_cost":"需要时间澄清","fit_if":"需求不清楚且能先交换信息时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果对方明确面临即时安全风险，哪个优先级必须改变？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S09","domain":"环境","title":"资源不对等下的表达","situation":"你在组织中权力较弱，发现流程有风险。负责人不喜欢公开被质疑，但有正式反馈渠道。","context":{"time_pressure":"中","power_balance":"不对等","reversibility":"中"},"choices":[{"id":"A","action":"使用正式渠道提交可核查风险信息","possible_benefit":"提高可追溯性","possible_cost":"处理速度可能慢","fit_if":"渠道有效且无即时伤害时"},{"id":"B","action":"先私下向负责人提交事实与可行替代方案","possible_benefit":"可能降低防御性","possible_cost":"仍存在信息压制风险","fit_if":"私下沟通安全且负责人可回应时"},{"id":"C","action":"先和具有职责的专业人员核验证据与紧急性","possible_benefit":"降低事实错误与个人承压","possible_cost":"反馈可能延迟","fit_if":"风险尚不明确且非即时危险时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果风险即将导致不可逆伤害，是否还应等待常规流程？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S10","domain":"隐私","title":"分享他人的故事","situation":"你想用朋友经历说明一个观点，但故事细节可能让认识他的人猜出身份。","context":{"time_pressure":"低","power_balance":"对等","reversibility":"高"},"choices":[{"id":"A","action":"获得明确同意后才分享必要信息","possible_benefit":"尊重自主与信任","possible_cost":"可能无法获得同意","fit_if":"故事确有分享价值时"},{"id":"B","action":"仅讨论一般原则，不使用具体故事","possible_benefit":"避免泄露身份","possible_cost":"论据不够生动","fit_if":"隐私风险高或同意缺失时"},{"id":"C","action":"自己编写虚构的合成案例并明确标注","possible_benefit":"兼顾说明与保护","possible_cost":"虚构案例不能当真实证据","fit_if":"需要教学示例而非事实证明时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果涉及商业机密或私人健康经历，边界是否更严格？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S11","domain":"协作","title":"有人拖延影响你的计划","situation":"协作伙伴两次未按约交付，你不知道原因，自己的任务已经受到影响。","context":{"time_pressure":"中","power_balance":"对等","reversibility":"中"},"choices":[{"id":"A","action":"询问真实障碍并重新约定可检查节点","possible_benefit":"识别环境原因","possible_cost":"若持续失约会浪费时间","fit_if":"对方仍有执行机会时"},{"id":"B","action":"同步启动备用方案并说明风险","possible_benefit":"保护关键节点","possible_cost":"可能削弱彼此信任","fit_if":"关键任务已经濒临逾期时"},{"id":"C","action":"明确将任务重新拆分并记录责任边界","possible_benefit":"提升可操作性","possible_cost":"增加协调成本","fit_if":"任务本身拆分不清楚时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果对方处于不可控紧急情况，你的归因会改变吗？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"},{"id":"S12","domain":"韧性","title":"失败后的方向调整","situation":"你尝试的新习惯连续一周没做到；期间加班显著增加，实际触发条件与原计划不同。","context":{"time_pressure":"低","power_balance":"自主","reversibility":"高"},"choices":[{"id":"A","action":"分析触发条件，降低行动难度再试","possible_benefit":"让计划匹配现实约束","possible_cost":"调整可能减慢速度","fit_if":"旧目标过重或不可执行时"},{"id":"B","action":"保留目标，改变时间地点与提醒方式","possible_benefit":"提升可执行性","possible_cost":"若目标本身不合理可能无效","fit_if":"目标仍重要且资源足够时"},{"id":"C","action":"暂停这个目标，优先解决外部资源限制","possible_benefit":"避免反复失败","possible_cost":"短期无法积累行为","fit_if":"环境障碍是主要原因时"}],"reflection_questions":["你选哪项，最担心的后果是什么？","哪些事实是你知道的，哪些只是在推测？","如果恢复原有时间资源，你愿意怎样测试新方案？","如果把选择放到你的一次真实经历里，行动会一样吗？"],"scoring":"none","principle":"没有人格标准答案；记录目标、约束与反例"}]}</script>
 <script>
-'use strict';
-const selected = {choice:null};
-const byId = id => document.getElementById(id);
-const val = id => byId(id).value.trim();
-byId('reason').value = '';
-byId('choiceForm').addEventListener('submit',function(event){
- event.preventDefault();
- const checked = document.querySelector('input[name="choice"]:checked');
- const target = byId('scenarioResult');
- target.replaceChildren();
- if(!checked){target.textContent='请先选择一种策略。';target.classList.remove('hidden');return;}
- selected.choice = checked.value;
- const title = document.createElement('strong');
- title.textContent = '你选择了 '+checked.value+'，这不是人格判定。';
- const details = document.createElement('p');
- details.textContent = '你的理由：'+(val('reason') || '未填写')+'。条件变化：'+(val('conditions') || '未填写')+'。';
- const next = document.createElement('p');
- next.textContent = '候选解释至少有两种：你可能在保护决策质量，也可能在控制当众冲突的成本。仅凭一次假设选择无法区分；请结合下面的真实事件检验。';
- target.append(title,details,next);
- target.classList.remove('hidden');
+"use strict";
+const library=JSON.parse(document.getElementById("scenario-data").textContent);
+const scenarios=library.items;
+const ids=new Set(scenarios.map(s=>s.id));
+const state={selected:scenarios[0].id,answers:Object.create(null),eventId:"E-"+Date.now().toString(36)};
+const el=id=>document.getElementById(id), val=id=>el(id).value.trim();
+const set=(id,value)=>{el(id).value=value==null?"":value;};
+const words=s=>s.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+const node=(tag,text)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;return n;};
+const show=id=>{const n=el(id);n.replaceChildren();n.classList.remove("hidden");return n;};
+const line=(container,title,text)=>{const section=node("section");section.append(node("h3",title),node("p",text));container.append(section);};
+function saveScenario(){
+ const checked=document.querySelector('input[name="scenario-choice"]:checked');
+ state.answers[state.selected]={choice:checked?checked.value:null,reason:val("reason"),changed_conditions:val("conditions")};
+ el("progress").textContent=Object.values(state.answers).filter(a=>a.choice).length+" / "+scenarios.length;
+}
+function renderScenario(){
+ const s=scenarios.find(x=>x.id===state.selected),a=state.answers[s.id]||{};
+ el("scenarioSelect").value=s.id;
+ el("scenarioTitle").textContent=s.title;el("scenarioSituation").textContent=s.situation;
+ el("scenarioContext").textContent="领域："+s.domain+" · 时间压力："+s.context.time_pressure+" · 权力关系："+s.context.power_balance+" · 可逆性："+s.context.reversibility;
+ const box=el("choices");box.replaceChildren();
+ s.choices.forEach(c=>{
+  const label=node("label");label.className="choice";
+  const input=node("input");input.type="radio";input.name="scenario-choice";input.value=c.id;input.checked=a.choice===c.id;
+  input.addEventListener("change",()=>{saveScenario();el("scenarioResult").classList.add("hidden");});
+  const wrapper=node("span");wrapper.append(node("strong",c.id+" · "+c.action),node("small","可能收益："+c.possible_benefit+"；代价："+c.possible_cost));
+  label.append(input,wrapper);box.append(label);
+ });
+ set("reason",a.reason);set("conditions",a.changed_conditions);
+ el("scenarioResult").classList.add("hidden");
+ el("progress").textContent=Object.values(state.answers).filter(a=>a.choice).length+" / "+scenarios.length;
+}
+scenarios.forEach(s=>{const option=node("option",s.id+" · "+s.title);option.value=s.id;el("scenarioSelect").append(option);});
+el("scenarioSelect").addEventListener("change",e=>{saveScenario();state.selected=e.target.value;renderScenario();});
+["reason","conditions"].forEach(id=>el(id).addEventListener("input",saveScenario));
+el("next").addEventListener("click",()=>{saveScenario();const i=scenarios.findIndex(s=>s.id===state.selected);state.selected=scenarios[(i+1)%scenarios.length].id;renderScenario();el("scenarioSelect").focus();});
+el("reflect").addEventListener("click",()=>{
+ saveScenario();const s=scenarios.find(x=>x.id===state.selected),a=state.answers[s.id],target=show("scenarioResult");
+ if(!a.choice){target.append(node("p","请先选择一种策略。"));return;}
+ const c=s.choices.find(x=>x.id===a.choice);
+ line(target,"选择："+c.id+" · "+c.action,"假设选择不能证明真实行为或人格特质。");
+ line(target,"适用情境","潜在收益："+c.possible_benefit+"；潜在代价："+c.possible_cost+"；更适合："+c.fit_if+"。");
+ line(target,"条件与理由","理由："+(a.reason||"未填写")+"；可能改变选择的条件："+(a.changed_conditions||"未填写")+"。");
+ const ul=node("ul");s.reflection_questions.forEach(q=>ul.append(node("li",q)));const section=node("section");section.append(node("h3","下一步反思"),ul);target.append(section);
 });
-byId('export').addEventListener('click',()=>{
- const payload = {version:'0.1',type:'local_user_record',notice:'Not a personality assessment',
-  scenario:{id:'S01',choice:selected.choice,reason:val('reason'),changed_conditions:val('conditions')},
-  episode:{observed_facts:val('fact'),thoughts:val('thought'),action_taken:val('action'),outcome_observed:val('outcome'),if_then_plan:val('plan')}};
- const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
- const url=URL.createObjectURL(blob);
- const a=document.createElement('a');a.href=url;a.download='self-reflection-local.json';
- document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
+const eventFields=["eventDate","domain","goal","constraints","fact","thought","emotion","action","outcome","unknown","capability","opportunity","motivation","explanation1","explanation2","counterexample","trigger","thenAction","expected","stopRule","reviewDate","reviewNotes"];
+const hasEvent=()=>eventFields.some(id=>val(id)!=="");
+const missing=()=>!hasEvent()?[]:[["eventDate","事件日期"],["goal","目标"],["fact","事实"],["action","行动"],["outcome","结果"]].filter(([id])=>!val(id)).map(x=>x[1]);
+function episode(){
+ if(!hasEvent())return null;
+ return {event_id:state.eventId,date:val("eventDate"),
+ context:{domain:val("domain"),goal:val("goal"),constraints:words(val("constraints")),time_pressure:val("timePressure"),power_balance:val("powerBalance"),reversibility:val("reversibility")},
+ observed_facts:[val("fact")],thoughts:words(val("thought")),emotions:words(val("emotion")),
+ action_taken:val("action"),outcome_observed:val("outcome"),uncertainties:words(val("unknown")),
+ alternative_explanations:[val("explanation1"),val("explanation2")].filter(Boolean),
+ evidence_sources:["self_report"],
+ if_then_plan:val("trigger")&&val("thenAction")?"当 "+val("trigger")+"，就 "+val("thenAction"):null,
+ review_status:val("reviewStatus")};
+}
+const reflection=()=>({capability:val("capability"),opportunity:val("opportunity"),motivation:val("motivation"),counterexample:val("counterexample"),trigger:val("trigger"),then_action:val("thenAction"),expected_outcome:val("expected"),stop_condition:val("stopRule")});
+function payload(){
+ saveScenario();
+ return {version:"0.2",type:"local_user_record",exported_at:new Date().toISOString(),notice:"Not a personality assessment",
+ scenarios:scenarios.filter(s=>state.answers[s.id]&&(state.answers[s.id].choice||state.answers[s.id].reason||state.answers[s.id].changed_conditions)).map(s=>({id:s.id,...state.answers[s.id]})),
+ episode:episode(),reflection:reflection(),review:{date:val("reviewDate"),status:val("reviewStatus"),notes:val("reviewNotes")}};
+}
+el("analyze").addEventListener("click",()=>{
+ const box=show("analysisResult"),errors=missing();
+ if(!hasEvent()||errors.length){box.append(node("p",!hasEvent()?"请先填写真实事件。":"请补充："+errors.join("、")));return;}
+ const e=episode();
+ line(box,"1 · 自述观察","事件 "+e.event_id+"（"+e.date+"）：目标："+e.context.goal+"；事实："+e.observed_facts.join("；")+"；行动："+e.action_taken+"；结果："+e.outcome_observed+"。");
+ line(box,"2 · 竞争解释","解释一："+(val("explanation1")||"未填写")+"。解释二："+(val("explanation2")||"未填写")+"。两者都没有得到验证。");
+ line(box,"3 · 情境条件","能力："+(val("capability")||"未记录")+"；环境："+(val("opportunity")||"未记录")+"；动机："+(val("motivation")||"未记录")+"；外部约束："+(e.context.constraints.join("；")||"未记录")+"。");
+ line(box,"4 · 反证","潜在反例："+(val("counterexample")||"未提出")+"；尚未知："+(e.uncertainties.join("；")||"未记录")+"。");
+ line(box,"5 · 行动实验",e.if_then_plan||"尚未写出 If–Then 计划。");
+ line(box,"证据状态","这是 1 次真实事件，无法形成行为趋势。需要至少 3 次可比事件、2 个不同日期，并主动检查反例。");
 });
-</script>
-</body>
-</html>
+el("export").addEventListener("click",()=>{
+ const status=el("fileStatus"),errors=missing();
+ if(errors.length){status.className="error";status.textContent="未导出，请补齐："+errors.join("、");return;}
+ const data=payload();
+ if(!data.episode&&!data.scenarios.length){status.className="error";status.textContent="至少选择一道情境题，或填写一件真实事件。";return;}
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json;charset=utf-8"}),url=URL.createObjectURL(blob);
+ const a=node("a");a.href=url;a.download="self-understanding-"+new Date().toISOString().slice(0,10)+".json";document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);status.className="ok";status.textContent="已生成本地 JSON。请保存后再离开页面。";
+});
+el("importJson").addEventListener("change",async e=>{
+ const status=el("fileStatus"),file=e.target.files?.[0];if(!file)return;
+ try{
+  if(file.size>1048576)throw Error("文件超过 1 MB");
+  const data=JSON.parse(await file.text());
+  if(!data||data.type!=="local_user_record"||!["0.1","0.2"].includes(data.version))throw Error("记录格式不匹配");
+  const previous=Array.isArray(data.scenarios)?data.scenarios:(data.scenario?[data.scenario]:[]);
+  const answers=Object.create(null);
+  for(const a of previous){if(!a||!ids.has(a.id))continue;const s=scenarios.find(x=>x.id===a.id);
+   answers[a.id]={choice:s.choices.some(x=>x.id===a.choice)?a.choice:null,reason:String(a.reason||""),changed_conditions:String(a.changed_conditions||"")};
+  }
+  state.answers=answers;state.selected=previous.find(x=>x&&ids.has(x.id))?.id||scenarios[0].id;
+  const ep=data.episode||{},context=ep.context||{},r=data.reflection||{},review=data.review||{};
+  if(typeof ep.event_id==="string"&&ep.event_id)state.eventId=ep.event_id;
+  const joined=x=>Array.isArray(x)?x.join("\n"):(x||"");
+  const fields={eventDate:ep.date,domain:context.domain,goal:context.goal,constraints:joined(context.constraints),fact:joined(ep.observed_facts),
+   thought:joined(ep.thoughts),emotion:joined(ep.emotions),action:ep.action_taken,outcome:ep.outcome_observed,unknown:joined(ep.uncertainties),
+   capability:r.capability,opportunity:r.opportunity,motivation:r.motivation,explanation1:ep.alternative_explanations?.[0],
+   explanation2:ep.alternative_explanations?.[1],counterexample:r.counterexample,trigger:r.trigger,thenAction:r.then_action,
+   expected:r.expected_outcome,stopRule:r.stop_condition,reviewDate:review.date,reviewNotes:review.notes};
+  Object.entries(fields).forEach(([id,v])=>set(id,v));
+  const choose=(id,v)=>{const x=el(id);x.value=[...x.options].some(opt=>opt.value===v)?v:x.options[0].value;};
+  choose("timePressure",context.time_pressure);choose("powerBalance",context.power_balance);choose("reversibility",context.reversibility);
+  choose("reviewStatus",review.status||ep.review_status);
+  renderScenario();el("analysisResult").classList.add("hidden");status.className="ok";status.textContent="导入成功，可继续编辑并重新导出。";
+ }catch(error){status.className="error";status.textContent="导入失败："+error.message;}
+ finally{e.target.value="";}
+});
+renderScenario();
+</script></body></html>
